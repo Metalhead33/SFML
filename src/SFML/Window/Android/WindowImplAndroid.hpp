@@ -54,6 +54,7 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     WindowImplAndroid(WindowHandle handle);
+	virtual VkSurfaceCreateInfoKHR getVulkanSurfaceInfo();
 
     ////////////////////////////////////////////////////////////
     /// \brief Create the window implementation

@@ -51,6 +51,10 @@ m_size          (0, 0)
 }
 
 
+VkSurfaceCreateInfoKHR Window::getVulkanSurfaceCreateInfo()
+{
+	return m_impl->getVulkanSurfaceInfo();
+}
 ////////////////////////////////////////////////////////////
 Window::Window(VideoMode mode, const String& title, Uint32 style, const ContextSettings& settings) :
 m_impl          (NULL),

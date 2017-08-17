@@ -43,6 +43,7 @@
 #include <SFML/Window/Window.hpp>
 #include <queue>
 #include <set>
+#include "VulkanWrapper.hpp"
 
 namespace sf
 {
@@ -80,6 +81,8 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     static WindowImpl* create(WindowHandle handle);
+	
+	virtual VkSurfaceCreateInfoKHR getVulkanSurfaceInfo() = 0;
 
 public:
 

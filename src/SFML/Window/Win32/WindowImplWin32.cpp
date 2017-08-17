@@ -320,6 +320,16 @@ void WindowImplWin32::setPosition(const Vector2i& position)
 }
 
 
+VkSurfaceCreateInfoKHR WindowImplWin32::getVulkanSurfaceInfo()
+{
+	VkSurfaceCreateInfoKHR temp;
+	temp.win32.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+	temp.win32.pNext = 0;
+	temp.win32.flags = 0;
+	temp.win32.hinstance = GetModuleHandle(0);
+	temp.win32.hwnd = m_handle;
+	return temp;
+}
 ////////////////////////////////////////////////////////////
 Vector2u WindowImplWin32::getSize() const
 {

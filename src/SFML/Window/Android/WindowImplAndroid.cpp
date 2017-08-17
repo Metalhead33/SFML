@@ -437,6 +437,15 @@ int WindowImplAndroid::processKeyEvent(AInputEvent* _event, ActivityStates* stat
 }
 
 
+VkSurfaceCreateInfoKHR WindowImplAndroid::getVulkanSurfaceInfo()
+{
+	VkSurfaceCreateInfoKHR temp;
+	temp.android.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
+	temp.android.pNext = 0;
+	temp.android.flags = 0;
+	temp.android.window = getSystemHandle();
+	return temp;
+}
 ////////////////////////////////////////////////////////////
 int WindowImplAndroid::processMotionEvent(AInputEvent* _event, ActivityStates* states)
 {

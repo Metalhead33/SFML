@@ -425,6 +425,16 @@ m_lastInputTime  (0)
 }
 
 
+VkSurfaceCreateInfoKHR WindowImplX11::getVulkanSurfaceInfo()
+	{
+		VkSurfaceCreateInfoKHR tmp;
+		tmp.xlib.sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
+		tmp.xlib.pNext = 0;
+		tmp.xlib.flags = 0;
+		tmp.xlib.dpy = m_display;
+		tmp.xlib.window = m_window;
+		return tmp;
+	}
 ////////////////////////////////////////////////////////////
 WindowImplX11::WindowImplX11(VideoMode mode, const String& title, unsigned long style, const ContextSettings& settings) :
 m_window         (0),
