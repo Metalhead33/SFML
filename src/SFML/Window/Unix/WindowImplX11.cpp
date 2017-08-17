@@ -435,6 +435,11 @@ VkSurfaceCreateInfoKHR WindowImplX11::getVulkanSurfaceInfo()
 		tmp.xlib.window = m_window;
 		return tmp;
 	}
+	VkResult WindowImplX11::vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface)
+	{
+		VkSurfaceCreateInfoKHR tmp = getVulkanSurfaceInfo();
+		return vkCreateXlibSurfaceKHR(instance,&tmp.xlib,pAllocator,pSurface);
+	}
 ////////////////////////////////////////////////////////////
 WindowImplX11::WindowImplX11(VideoMode mode, const String& title, unsigned long style, const ContextSettings& settings) :
 m_window         (0),

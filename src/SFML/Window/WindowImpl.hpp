@@ -43,7 +43,7 @@
 #include <SFML/Window/Window.hpp>
 #include <queue>
 #include <set>
-#include "VulkanWrapper.hpp"
+#include <SFML/Window/VulkanWrapper.hpp>
 
 namespace sf
 {
@@ -83,6 +83,8 @@ public:
     static WindowImpl* create(WindowHandle handle);
 	
 	virtual VkSurfaceCreateInfoKHR getVulkanSurfaceInfo() = 0;
+	virtual VkResult vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface) = 0;
+	static void getNeededVkExtensions(const char** buff, uint32_t* counter);
 
 public:
 
@@ -269,6 +271,8 @@ private:
     ///
     ////////////////////////////////////////////////////////////
     void processSensorEvents();
+	static bool VulkanInitialized;
+	static void InitializeVulkan();
 
     ////////////////////////////////////////////////////////////
     // Member data

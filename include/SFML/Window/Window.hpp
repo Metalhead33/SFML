@@ -39,6 +39,7 @@
 #include <SFML/System/NonCopyable.hpp>
 #include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Window/VulkanWrapper.hpp>
 
 
 namespace sf
@@ -68,6 +69,8 @@ public:
     ////////////////////////////////////////////////////////////
     Window();
 	VkSurfaceCreateInfoKHR getVulkanSurfaceCreateInfo();
+	VkResult vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface);
+	static void getNeededVkExtensions(const char** buff, uint32_t* counter);
 
     ////////////////////////////////////////////////////////////
     /// \brief Construct a new window

@@ -54,6 +54,7 @@ public:
     ////////////////////////////////////////////////////////////
     WindowImplWin32(WindowHandle handle);
 	virtual VkSurfaceCreateInfoKHR getVulkanSurfaceInfo();
+	virtual VkResult vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface);
 
     ////////////////////////////////////////////////////////////
     /// \brief Create the window implementation

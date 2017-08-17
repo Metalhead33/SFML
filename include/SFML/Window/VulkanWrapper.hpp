@@ -260,7 +260,7 @@ union VkSurfaceCreateInfoKHR
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
 	VkWaylandSurfaceCreateInfoKHR wayland;
 #endif
-;}
+};
 
 
 #endif // VULKAN_WRAPPER_H

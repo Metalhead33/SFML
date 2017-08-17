@@ -446,6 +446,11 @@ VkSurfaceCreateInfoKHR WindowImplAndroid::getVulkanSurfaceInfo()
 	temp.android.window = getSystemHandle();
 	return temp;
 }
+	VkResult WindowImplWin32::vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface)
+	{
+		VkSurfaceCreateInfoKHR tmp = getVulkanSurfaceInfo();
+		return vkCreateAndroidSurfaceKHR(instance,&tmp.android,pAllocator,pSurface);
+	}
 ////////////////////////////////////////////////////////////
 int WindowImplAndroid::processMotionEvent(AInputEvent* _event, ActivityStates* states)
 {

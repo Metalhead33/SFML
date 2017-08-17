@@ -330,6 +330,11 @@ VkSurfaceCreateInfoKHR WindowImplWin32::getVulkanSurfaceInfo()
 	temp.win32.hwnd = m_handle;
 	return temp;
 }
+	VkResult WindowImplWin32::vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface)
+	{
+		VkSurfaceCreateInfoKHR tmp = getVulkanSurfaceInfo();
+		return vkCreateWin32SurfaceKHR(instance,&tmp.win32,pAllocator,pSurface);
+	}
 ////////////////////////////////////////////////////////////
 Vector2u WindowImplWin32::getSize() const
 {
