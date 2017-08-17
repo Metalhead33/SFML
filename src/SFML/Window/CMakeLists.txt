@@ -40,7 +40,9 @@ set(SRC
     ${INCROOT}/VideoMode.hpp
     ${SRCROOT}/VideoModeImpl.hpp
     ${SRCROOT}/Window.cpp
+    ${SRCROOT}/VulkanWrapper.cpp
     ${INCROOT}/Window.hpp
+    ${INCROOT}/VulkanWrapper.hpp
     ${INCROOT}/WindowHandle.hpp
     ${SRCROOT}/WindowImpl.cpp
     ${SRCROOT}/WindowImpl.hpp
