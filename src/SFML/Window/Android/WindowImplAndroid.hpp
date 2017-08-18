@@ -54,8 +54,6 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     WindowImplAndroid(WindowHandle handle);
-	virtual VkSurfaceCreateInfoKHR getVulkanSurfaceInfo();
-	virtual VkResult vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface);
 
     ////////////////////////////////////////////////////////////
     /// \brief Create the window implementation
@@ -67,6 +65,7 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     WindowImplAndroid(VideoMode mode, const String& title, unsigned long style, const ContextSettings& settings);
+	virtual NativeWindowHandle getNativeSurface();
 
     ////////////////////////////////////////////////////////////
     /// \brief Destructor

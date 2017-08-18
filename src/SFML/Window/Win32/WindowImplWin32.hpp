@@ -53,8 +53,6 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     WindowImplWin32(WindowHandle handle);
-	virtual VkSurfaceCreateInfoKHR getVulkanSurfaceInfo();
-	virtual VkResult vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface);
 
     ////////////////////////////////////////////////////////////
     /// \brief Create the window implementation
@@ -66,6 +64,7 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     WindowImplWin32(VideoMode mode, const String& title, Uint32 style, const ContextSettings& settings);
+	virtual NativeWindowHandle getNativeSurface();
 
     ////////////////////////////////////////////////////////////
     /// \brief Destructor

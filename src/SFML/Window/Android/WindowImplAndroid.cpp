@@ -122,6 +122,13 @@ void WindowImplAndroid::processEvents()
 }
 
 
+NativeWindowHandle getNativeSurface()
+{
+	NativeWindowHandle temp;
+	temp.platform = android;
+	temp.handle.android = getSystemHandle();
+	return temp;
+}
 ////////////////////////////////////////////////////////////
 Vector2i WindowImplAndroid::getPosition() const
 {
@@ -437,20 +444,6 @@ int WindowImplAndroid::processKeyEvent(AInputEvent* _event, ActivityStates* stat
 }
 
 
-VkSurfaceCreateInfoKHR WindowImplAndroid::getVulkanSurfaceInfo()
-{
-	VkSurfaceCreateInfoKHR temp;
-	temp.android.sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
-	temp.android.pNext = 0;
-	temp.android.flags = 0;
-	temp.android.window = getSystemHandle();
-	return temp;
-}
-	VkResult WindowImplWin32::vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface)
-	{
-		VkSurfaceCreateInfoKHR tmp = getVulkanSurfaceInfo();
-		return vkCreateAndroidSurfaceKHR(instance,&tmp.android,pAllocator,pSurface);
-	}
 ////////////////////////////////////////////////////////////
 int WindowImplAndroid::processMotionEvent(AInputEvent* _event, ActivityStates* states)
 {

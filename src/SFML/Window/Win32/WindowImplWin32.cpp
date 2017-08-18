@@ -320,21 +320,6 @@ void WindowImplWin32::setPosition(const Vector2i& position)
 }
 
 
-VkSurfaceCreateInfoKHR WindowImplWin32::getVulkanSurfaceInfo()
-{
-	VkSurfaceCreateInfoKHR temp;
-	temp.win32.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
-	temp.win32.pNext = 0;
-	temp.win32.flags = 0;
-	temp.win32.hinstance = GetModuleHandle(0);
-	temp.win32.hwnd = m_handle;
-	return temp;
-}
-	VkResult WindowImplWin32::vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface)
-	{
-		VkSurfaceCreateInfoKHR tmp = getVulkanSurfaceInfo();
-		return vkCreateWin32SurfaceKHR(instance,&tmp.win32,pAllocator,pSurface);
-	}
 ////////////////////////////////////////////////////////////
 Vector2u WindowImplWin32::getSize() const
 {
@@ -363,6 +348,14 @@ void WindowImplWin32::setSize(const Vector2u& size)
 void WindowImplWin32::setTitle(const String& title)
 {
     SetWindowTextW(m_handle, title.toWideString().c_str());
+}
+NativeWindowHandle getNativeSurface()
+{
+	NativeWindowHandle temp;
+	temp.platform = win32;
+	temp.handle.win32.hinstance = GetModuleHandle(NULL);
+	temp.handle.win32.hwnd = m_handle;
+	return temp;
 }
 
 

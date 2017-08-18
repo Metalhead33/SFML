@@ -425,21 +425,6 @@ m_lastInputTime  (0)
 }
 
 
-VkSurfaceCreateInfoKHR WindowImplX11::getVulkanSurfaceInfo()
-	{
-		VkSurfaceCreateInfoKHR tmp;
-		tmp.xlib.sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
-		tmp.xlib.pNext = 0;
-		tmp.xlib.flags = 0;
-		tmp.xlib.dpy = m_display;
-		tmp.xlib.window = m_window;
-		return tmp;
-	}
-	VkResult WindowImplX11::vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface)
-	{
-		VkSurfaceCreateInfoKHR tmp = getVulkanSurfaceInfo();
-		return vkCreateXlibSurfaceKHR(instance,&tmp.xlib,pAllocator,pSurface);
-	}
 ////////////////////////////////////////////////////////////
 WindowImplX11::WindowImplX11(VideoMode mode, const String& title, unsigned long style, const ContextSettings& settings) :
 m_window         (0),
@@ -628,6 +613,14 @@ m_lastInputTime  (0)
 }
 
 
+NativeWindowHandle WindowImplX11::getNativeSurface()
+{
+	NativeWindowHandle temp;
+	temp.platform = xlib;
+	temp.handle.xlib.dpy = m_display;
+	temp.handle.xlib.window = m_window;
+	return temp;
+}
 ////////////////////////////////////////////////////////////
 WindowImplX11::~WindowImplX11()
 {

@@ -51,18 +51,6 @@ m_size          (0, 0)
 }
 
 
-VkSurfaceCreateInfoKHR Window::getVulkanSurfaceCreateInfo()
-{
-	return m_impl->getVulkanSurfaceInfo();
-}
-VkResult Window::vkCreateSurfaceKHR(VkInstance instance, const VkAllocationCallbacks* pAllocator,VkSurfaceKHR* pSurface)
-{
-	return m_impl->vkCreateSurfaceKHR(instance,pAllocator,pSurface);
-}
-void Window::getNeededVkExtensions(const char** buff, uint32_t* counter)
-{
-	priv::WindowImpl::getNeededVkExtensions(buff,counter);
-}
 ////////////////////////////////////////////////////////////
 Window::Window(VideoMode mode, const String& title, Uint32 style, const ContextSettings& settings) :
 m_impl          (NULL),
@@ -71,6 +59,10 @@ m_frameTimeLimit(Time::Zero),
 m_size          (0, 0)
 {
     create(mode, title, style, settings);
+}
+priv::NativeWindowHandle Window::NativeWindowHandle getNativeSurface()
+{
+	return m_impl->getNativeSurface();
 }
 
 

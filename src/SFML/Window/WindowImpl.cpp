@@ -77,28 +77,7 @@ WindowImpl* WindowImpl::create(WindowHandle handle)
 {
     return new WindowImplType(handle);
 }
-void WindowImpl::getNeededVkExtensions(const char** buff, uint32_t* counter)
-{
-	InitializeVulkan();
-	if(counter) *counter = 2;
-	if(buff)
-	{
-		buff[0] = "VK_KHR_surface";
-		#if defined(VK_USE_PLATFORM_WIN32_KHR)
-		buff[1] ="VK_KHR_win32_surface";
-#elif defined(VK_USE_PLATFORM_XCB_KHR)
-		buff[1] ="VK_KHR_xcb_surface";
-#elif defined(VK_USE_PLATFORM_XLIB_KHR)
-		buff[1] ="VK_KHR_xlib_surface";
-#elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
-		buff[1] ="VK_KHR_wayland_surface";
-#elif defined(VK_USE_PLATFORM_MIR_KHR)
-		buff[1] ="VK_KHR_mir_surface";
-#elif defined(VK_USE_PLATFORM_ANDROID_KHR)
-		buff[1] ="VK_KHR_android_surface";
-#endif
-	}
-}
+
 
 ////////////////////////////////////////////////////////////
 WindowImpl::WindowImpl() :
@@ -240,14 +219,6 @@ void WindowImpl::processJoystickEvents()
     }
 }
 
-void WindowImpl::InitializeVulkan()
-{
-	if(!VulkanInitialized)
-	{
-		InitVulkan();
-		VulkanInitialized = true;
-	}
-}
 
 ////////////////////////////////////////////////////////////
 void WindowImpl::processSensorEvents()

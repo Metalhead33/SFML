@@ -37,15 +37,26 @@
 
 namespace sf
 {
+	
 #if defined(SFML_SYSTEM_WINDOWS)
 
     // Window handle is HWND (HWND__*) on Windows
     typedef HWND__* WindowHandle;
+	struct WindowsWindow
+	{
+		HINSTANCE hinstance;
+		HWND hwnd;
+	};
 
 #elif defined(SFML_SYSTEM_LINUX) || defined(SFML_SYSTEM_FREEBSD)
 
     // Window handle is Window (unsigned long) on Unix - X11
-    typedef unsigned long WindowHandle;
+     typedef unsigned long WindowHandle;
+    struct XlibHandle
+	{
+		Display* dpy;
+		Window window;
+	};
 
 #elif defined(SFML_SYSTEM_MACOS)
 
@@ -61,6 +72,7 @@ namespace sf
 
     // Window handle is ANativeWindow* (void*) on Android
     typedef void* WindowHandle;
+	// No need for that.
 
 #elif defined(SFML_DOXYGEN)
 
@@ -69,6 +81,35 @@ namespace sf
 
 #endif
 
+union __WinHandler
+{
+	int dummy;
+#if defined(SFML_SYSTEM_WINDOWS)
+	WindowsWindow win32;
+#endif
+#if defined(SFML_SYSTEM_LINUX) || defined(SFML_SYSTEM_FREEBSD)
+	XlibHandle xlib;
+#endif
+#if defined(SFML_SYSTEM_ANDROID)
+	ANativeWindow* android;
+#endif
+};
+
+enum NativePlatform
+{
+	win32,
+	xlib,
+	cocoa,
+	ios,
+	android
+};
+
+struct NativeWindowHandle
+{
+	NativePlatform platform;
+	__WinHandler handle;
+};
+	
 } // namespace sf
 
 
